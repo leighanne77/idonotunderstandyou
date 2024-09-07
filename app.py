@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+from workers import transform_message
 from text_to_speech_model import generate_audio
 from speech_to_text_model.transcribe import transcribe_audio_from_url
 from flask_cors import CORS
@@ -14,6 +15,7 @@ def generate_audio_endpoint():
     # Get the JSON data
     data = request.get_json()
     text = data["text"]
+    text = transform_message(text)
     voice_id = 's3://voice-cloning-zero-shot/76012827-67be-4ea5-b71c-ea7faecb0bb9/original/manifest.json'
     return generate_audio(text, voice_id)
 

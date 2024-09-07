@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
 from text_to_speech_model import generate_audio
 from speech_to_text_model.transcribe import transcribe_audio_from_url
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/generate_audio')
 def generate_audio_endpoint():
@@ -25,6 +27,5 @@ def transcribe_audio(url):
     url = data["url"]
     return transcribe_audio_from_url(url)
 
-# Start the Flask app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)

@@ -41,6 +41,6 @@ def transform_message(message):
     return output['result']['response']
 
 
-output = transform_message("Where are you now?")
-print(output)
-
+# Testing
+# output = transform_message("Where are you now?")
+# print(output)

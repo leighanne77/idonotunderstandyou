@@ -37,8 +37,11 @@ def transform_message(message):
         { "role": "system", "content": SYSTEM_PROMPT },
         { "role": "user", "content": message}
     ]
-    output = get_response(models["llama-3-8b-instruct"], inputs)
-    return output['result']['response']
+    try: 
+        output = get_response(models["llama-3-8b-instruct"], inputs)
+        return output['result']['response']
+    except:
+        return "Sorry there is an error with the endpoint, slay!"
 
 
 # Testing

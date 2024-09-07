@@ -1,24 +1,17 @@
-# voice file (on local drive) to text with AssemblyAI API
-
 import assemblyai as aai
 
 # Replace with your API key
 aai.settings.api_key = "ab2e6af91c8c4b2bacac1bc85c8f559d"
 
-# Path to your local audio file - which still needs to be generated 
-# b/c Leigh will need a script from a Generation Alpha and Millenial person
-FILE_PATH = "./path/to/your/local/audio/file.mp3"
-
-# Ensure the file exists
-if not os.path.exists(FILE_PATH):
-    raise FileNotFoundError(f"The file {FILE_PATH} does not exist.")
+# URL of the file to transcribe
+FILE_URL = "https://4609b344e8460fded1cf1fb01ec4f883.cdn.bubble.io/f1725739842477x460990146050464200/null.mp3"
 
 # Create a transcriber instance
 transcriber = aai.Transcriber()
 
-# Transcribe the local file
+# Transcribe the file from URL
 try:
-    transcript = transcriber.transcribe(FILE_PATH)
+    transcript = transcriber.transcribe(FILE_URL)
     
     # Print the transcribed text
     print("Transcription completed. Here's the result:")

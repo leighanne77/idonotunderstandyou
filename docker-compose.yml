@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  stt-model:
+    build:
+      context: ./speech_to_text_model
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./speech_to_text_model:/app
+    environment:
+      FLASK_ENV: development
+
+  tts-model:
+    build:
+      context: ./text_to_speech_model
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./text_to_speech_model:/app
+    environment:
+      FLASK_ENV: development
+
+  flask-app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      FLASK_ENV: development
+    depends_on:
+      - stt-model
+      - tts-model
